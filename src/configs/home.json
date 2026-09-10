@@ -24,6 +24,20 @@
       "icon": "InfoRound",
       "type": "router",
       "router": "/about"
+    },
+    {
+      "name": "博客",
+      "icon": "ArticleRound",
+      "type": "router",
+      "router": "/blog",
+      "requiresAdmin": true
+    },
+    {
+      "name": "金融",
+      "icon": "AttachMoneyRound",
+      "type": "link",
+      "link": "https://money.jayhu.site/",
+      "requiresAdmin": true
     }
   ],
   "contactMe": [

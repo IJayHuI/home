@@ -9,6 +9,7 @@
   import { onMounted, onUnmounted, watch } from 'vue'
   import { gsap } from 'gsap'
   import ScrollTrigger from 'gsap/ScrollTrigger'
+  import { TuneRound } from '@vicons/material'
   import { useGeneralStore, useHomeStore } from '../../stores'
   import homeTheme from '../../theme/home.json'
 
@@ -26,7 +27,7 @@
   import JayBackgroundChange from '../../components/home/JayBackgroundChange.vue'
   import JayScrollTip from '../../components/home/JayScrollTip.vue'
   import JayIntroduction from '../../components/home/JayIntroduction.vue'
-  import JayBackgroundIntroduction from '../../components/home/JayBackgroundIntroduction.vue'
+  import JayDrawer from '../../components/home/JayDrawer.vue'
 
   const general = useGeneralStore()
   const home = useHomeStore()
@@ -62,6 +63,10 @@
           ease: 'none'
         }
       )
+  }
+
+  const openSettingsDrawer = () => {
+    home.setSettingsDrawerOpen(true)
   }
 
   // 挂载时创建动画 + 拉取壁纸
@@ -131,18 +136,14 @@
               <jay-log />
             </n-card>
 
-            <div class="grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))] gap-4">
-              <jay-background-introduction v-slide-in />
-
-              <div class="grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))] gap-4">
-                <jay-theme-change v-slide-in />
-
-                <jay-background-change v-slide-in />
-              </div>
-            </div>
+            <n-card v-magnetic @click="openSettingsDrawer" size="small" content-class="flex items-center justify-center gap-5" v-slide-in>
+              <n-icon size="40"><tune-round /></n-icon>
+              <p class="text-xl font-bold">设置</p>
+            </n-card>
           </section>
         </main>
       </div>
+      <jay-drawer />
     </n-config-provider>
     <n-config-provider v-else :theme-overrides="general.isDark ? homeTheme.dark.mobile : homeTheme.light.mobile">
       <main class="flex flex-col gap-2 p-2">
@@ -179,7 +180,6 @@
           <n-card title="简介" v-slide-in>
             <jay-introduction />
           </n-card>
-          <jay-background-introduction v-slide-in />
 
           <n-card v-slide-in title="技术栈" content-class="flex flex-row flex-wrap gap-2">
             <jay-tech-list />

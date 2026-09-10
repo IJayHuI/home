@@ -2,9 +2,6 @@
   "common": {
     "borderRadius": "8px"
   },
-  "Spin": {
-    "opacitySpinning": 0
-  },
   "Layout": {
     "footerColor": "rgba(255, 255, 255, 0)"
   },

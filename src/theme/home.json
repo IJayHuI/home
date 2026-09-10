@@ -4,6 +4,9 @@
       "Card": {
         "color": "rgba(255, 255, 255, 0.6)",
         "borderColor": "rgba(255, 255, 255, 0.25)"
+      },
+      "Drawer": {
+        "color":"rgba(255, 255, 255, 0.6)"
       }
     },
     "mobile": {
@@ -11,6 +14,9 @@
         "color": "rgba(255, 255, 255, 0.6)",
         "colorModal": "rgba(255, 255, 255, 0.5)",
         "borderColor": "rgba(255, 255, 255, 0.25)"
+      },
+      "Drawer": {
+        "color": "rgba(255, 255, 255, 0.6)"
       }
     }
   },
@@ -18,12 +24,18 @@
     "desktop": {
       "Card": {
         "color": "rgba(24, 24, 28, 0.5)"
+      },
+      "Drawer": {
+        "color": "rgba(24, 24, 28, 0.5)"
       }
     },
     "mobile": {
       "Card": {
         "color": "rgba(24, 24, 28, 0.5)",
         "colorModal": "rgba(44, 44, 50, 0.5)"
+      },
+      "Drawer": {
+        "color": "rgba(24, 24, 28, 0.5)"
       }
     }
   }

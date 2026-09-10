@@ -58,6 +58,9 @@ export const useHomeStore = defineStore(
     // 热力图总贡献数
     const heatmapTotal = ref(0)
 
+    // --- state：设置抽屉 ---
+    const isSettingsDrawerOpen = ref(false)
+
     // --- setters：壁纸 ---
     function setBackgroundMode(v: BackgroundMode) {
       backgroundMode.value = v
@@ -113,6 +116,11 @@ export const useHomeStore = defineStore(
     }
     function setHeatmapTotal(v: number) {
       heatmapTotal.value = v
+    }
+
+    // --- setters：抽屉 ---
+    function setSettingsDrawerOpen(v: boolean) {
+      isSettingsDrawerOpen.value = v
     }
 
     // --- fetch actions ---
@@ -203,6 +211,9 @@ export const useHomeStore = defineStore(
       heatmapData,
       heatmapTotal,
 
+      // 设置抽屉
+      isSettingsDrawerOpen,
+
       // setters
       setBackgroundMode,
       setBackgroundSrc,
@@ -219,7 +230,8 @@ export const useHomeStore = defineStore(
       setYiYanSource,
       setHeatmapData,
       setHeatmapTotal,
-
+      setSettingsDrawerOpen,
+      
       // fetch actions
       fetchBackground,
       fetchLogs,

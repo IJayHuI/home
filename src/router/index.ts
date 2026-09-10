@@ -30,12 +30,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/blog',
     name: 'Blog',
-    component: () => import('../views/blog/BlogView.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/blog/BlogView.vue'),
+    meta: { requiresAdmin: true }
   }
 ]
 

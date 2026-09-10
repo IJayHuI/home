@@ -51,7 +51,7 @@ let cursorStyleEl: HTMLStyleElement | null = null // 全局 cursor:none 样式
 function getDynamicScale(el: HTMLElement): number {
   const size = el.getBoundingClientRect().width
   const minSize = 30
-  const maxSize = 800
+  const maxSize = 500
   if (size <= minSize) return HOVER_SCALE_MIN
   if (size >= maxSize) return HOVER_SCALE_MAX
   const progress = (size - minSize) / (maxSize - minSize)

@@ -1,19 +1,45 @@
 import { supabase } from './supabase'
-import type { LoginPayload, Session } from '../types/auth'
+import type { LoginPayload } from '../types/auth'
+import type { User, Session } from '@supabase/supabase-js'
 
 /**
- * 调用 Supabase Edge Function `verify-password` 验证密码
+ * Supabase Auth 封装
  *
- * 阶段 2：接口签名写好，但 Edge Function 还没实现，login() 会失败
- * 阶段 4 实现 LoginView 时再处理错误
- *
- * 前向兼容：未来要加账号密码，改成 login(username, password) 即可
+ * 使用 supabase.auth 的原生能力：
+ * - signIn：邮箱密码登录
+ * - signOut：登出
+ * - getSession：获取当前 session（刷新页面时恢复登录态）
+ * - onAuthStateChange：监听认证状态变化（token 过期/刷新自动同步）
  */
-export async function verifyPassword(payload: LoginPayload): Promise<Session> {
-  const { data, error } = await supabase.functions.invoke<Session>(
-    'verify-password',
-    { body: { password: payload.password } }
-  )
+
+// 邮箱密码登录，返回 user
+export async function signIn(payload: LoginPayload): Promise<User> {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: payload.email,
+    password: payload.password
+  })
   if (error) throw error
-  return data as Session
+  return data.user!
+}
+
+// 登出
+export async function signOut(): Promise<void> {
+  const { error } = await supabase.auth.signOut()
+  if (error) throw error
+}
+
+// 获取当前 session（刷新页面时恢复登录态）
+export async function getSession(): Promise<Session | null> {
+  const { data, error } = await supabase.auth.getSession()
+  if (error) throw error
+  return data.session
+}
+
+// 监听认证状态变化（token 过期/刷新自动同步）
+export function onAuthStateChange(
+  callback: (user: User | null) => void
+) {
+  return supabase.auth.onAuthStateChange((_event, session) => {
+    callback(session?.user ?? null)
+  })
 }

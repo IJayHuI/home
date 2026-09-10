@@ -27,7 +27,9 @@ import {
   NHeatmap,
   NAvatar,
   NInput,
-  NImageGroup
+  NImageGroup,
+  NForm,
+  NFormItem
 } from 'naive-ui'
 import 'vfonts/Lato.css'
 import router from './router'
@@ -35,6 +37,7 @@ import slideIn from './directives/slide-in'
 import magnetic from './directives/magnetic'
 import interaction from './directives/interaction'
 import App from './App.vue'
+import { useAuthStore } from './stores/auth'
 import './style.css'
 
 // Pinia 实例 + 持久化插件
@@ -68,15 +71,21 @@ const naive = create({
     NHeatmap,
     NAvatar,
     NInput,
-    NImageGroup
+    NImageGroup,
+    NForm,
+    NFormItem
   ]
 })
 
-createApp(App)
-  .use(pinia)
-  .use(router)
-  .use(naive)
-  .directive('slide-in', slideIn)
-  .directive('magnetic', magnetic)
-  .directive('interaction', interaction)
-  .mount('#app')
+const app = createApp(App)
+app.use(pinia)
+app.use(router)
+app.use(naive)
+app.directive('slide-in', slideIn)
+app.directive('magnetic', magnetic)
+app.directive('interaction', interaction)
+
+// 初始化认证状态（恢复 session + 监听 onAuthStateChange）
+useAuthStore().initAuth()
+
+app.mount('#app')
